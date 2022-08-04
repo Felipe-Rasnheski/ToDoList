@@ -1,0 +1,109 @@
+.header {
+  height: 20rem;
+  background: var(--gray-700);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.container {
+  width: 73.6rem;
+  margin: 0 auto;
+  margin-top: -2.3rem;
+}
+
+form {
+  display: grid;
+  grid-template-columns: 1fr 9rem;
+  gap: .8rem;
+}
+
+input[type="text"] {
+  padding: 1rem;
+  border-radius: 8px;
+  color: var(--gray-300);
+  line-height: 1.6;
+  background: var(--gray-500);
+}
+
+input[type="text"]:focus {
+  color: var(--gray-100);
+}
+
+button[type="submit"] {
+  padding: 1rem;
+  border-radius: 8px;
+  font-size: 1.4rem;
+  color: var(--gray-100);
+  background: var(--blue-500);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: .8rem;
+}
+
+button[type="submit"]:hover {
+  background: var(--blue-300);
+  cursor: pointer;
+}
+
+button[type="submit"] span {
+  line-height: 0;
+}
+
+.tasks {
+  margin-top: 6.4rem;
+}
+
+.headerTasks {
+  display: flex;
+  justify-content: space-between;
+  color: var(--purple-300);
+}
+
+.headerTasks:first-child {
+  color: var(--blue-300);
+}
+
+.counter {
+  display: inline;
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+
+.counter > span {
+  display: inline-block;
+  text-align: center;
+  color: var(--gray-200);
+  background: var(--gray-400);
+  margin-left: .8rem;
+  width: 2.7rem;
+  height: 2.1rem;
+  border-radius: 45%;
+  padding: .2rem .8rem;
+}
+
+.tasksBox {
+  text-align: center;
+  border-top: 1px solid var(--gray-400);
+  margin-top: 2.4rem;
+  border-radius: 8px;
+}
+
+.tasksHasContent {
+  padding: 6.4rem 2.4rem;
+  transform: scaleY(1);
+}
+
+.tasksEmpty {
+  transform: scaleY(0);
+}
+
+.tasksHasContent  p {
+  font-weight: 700;
+  color: var(--gray-300);
+}
+
+.tasksHasContent span {
+  font-weight: 400;
+}
