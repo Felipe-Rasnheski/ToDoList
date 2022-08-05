@@ -57,6 +57,7 @@ button[type="submit"] span {
 
 .tasks {
   margin-top: 6.4rem;
+  cursor: default;
 }
 
 .headerTasks {
@@ -91,6 +92,7 @@ button[type="submit"] span {
 .tasksHasContent {
   transform: scaleY(0);
   position: absolute;
+  transition: none;
 }
 
 .tasksEmpty {

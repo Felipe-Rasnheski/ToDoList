@@ -46,9 +46,12 @@
 }
 
 .task p {
+  width: 100%;
+  word-break: break-all;
   font-size: 1.4rem;
   margin-left: 2.6rem;
-  line-height: 1.4; 
+  line-height: 1.4;
+  cursor: default;
 }
 
 .textTask {
