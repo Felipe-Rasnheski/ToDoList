@@ -55,8 +55,61 @@ button[type="submit"] span {
   line-height: 0;
 }
 
+.resetDaily {
+  height: 5rem;
+  padding: 2rem 0 1rem 0;
+  color: var(--gray-300);
+  transition: none;
+}
+
+.resetDaily p {
+  display: inline-block;
+  margin-left: 3rem;
+}
+
+.resetDaily span {
+  display: inline-block;
+  height: 1.6rem;
+  width: 1.6rem;
+  border-radius: 50%;
+  position: absolute;
+  margin-bottom: -.6rem;
+  transition: none;
+  margin-top: .2rem;
+}
+
+.resetDaily span.notReset {
+  border: 2px solid var(--blue-300);
+}
+
+.check {
+  transform: scaleY(0);
+  transition: none;
+}
+
+.resetDaily span.reset > .check {
+  position: absolute;
+  transform: scaleY(1);
+  color: var(--gray-100);
+  border: 1px solid var(--purple-500);
+  background: var(--purple-500);
+  border-radius: 50%;
+  display: block;
+  font-size: 1rem;
+  height: 1.6rem;
+  width: 1.6rem;
+}
+
+.resetDaily span.reset > .check:hover {
+  background: var(--purple-300);
+}
+
+.resetDaily .notReset:hover {
+  background: var(--gray-400)
+}
+
 .tasks {
-  margin-top: 6.4rem;
+  margin-top: 1.4rem;
   cursor: default;
 }
 

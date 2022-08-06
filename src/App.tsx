@@ -1,4 +1,4 @@
-import { PlusCircle } from 'phosphor-react'
+import { Check, PlusCircle } from 'phosphor-react'
 import { ChangeEvent, FormEvent, useState } from 'react'
 import styles from './App.module.css'
 import Clipboard from './Assets/Clipboard.svg'
@@ -12,6 +12,7 @@ export function App() {
   const [currentTasks, setCurrentTasks] = useState([''])
   const [tasksCompleted, setTasksCompleted] = useState([''])
   const [numberOfTasks, setNumberOfTasks] = useState(0)
+  const [isToReseteDaily, setIsToReseteDaily] = useState(false)
   
   function handleNewTask(event:FormEvent) {
     event.preventDefault()
@@ -49,7 +50,20 @@ export function App() {
     setCurrentTasks(tasksWithoutCompletedOne)
   }
 
-  const newTaskIsEmpty = newTask.length === 0
+  function handleTaskUncompleted(content: string) {
+    setCurrentTasks([...currentTasks, content])
+
+    const tasksWithoutUncompletedOne = tasksCompleted.filter(t => {
+      return t !== content
+    }) 
+    setTasksCompleted(tasksWithoutUncompletedOne)
+  }
+
+  function handleReset() {
+    setIsToReseteDaily(!isToReseteDaily)
+  }
+
+  const inputForNewTaskIsEmpty = newTask.length === 0
   const tasksEmpty = numberOfTasks === 0
   const amountCompleted = tasksCompleted.length - 1
 
@@ -66,8 +80,15 @@ export function App() {
             spellCheck={false}
             value={newTask} onChange={handleNewChange}>
           </input>
-          <button type="submit" disabled={newTaskIsEmpty}>Criar <span><PlusCircle size={18} /></span></button>
+          <button type="submit" disabled={inputForNewTaskIsEmpty}>Criar <span><PlusCircle size={18} /></span></button>
         </form>
+
+        <div className={styles.resetDaily}>
+          <label htmlFor="daily-time">
+            <span onClick={handleReset} className={isToReseteDaily ? styles.reset : styles.notReset}><Check className={styles.check}/></span>
+            <p>Resetar tarefas diariamente</p>
+          </label>
+        </div>
 
         <div className={styles.tasks}>
           <div className={styles.headerTasks}>
@@ -103,6 +124,7 @@ export function App() {
               key={`${numberOfTasks}${task}`}  
               content={task}
               deleteFromTasksCompleted={deleteFromTasksCompleted}
+              handleTaskUncompleted={handleTaskUncompleted}
             />
           )
         })} 
