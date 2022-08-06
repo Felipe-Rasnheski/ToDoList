@@ -4,19 +4,19 @@ import styles from './App.module.css'
 import Clipboard from './Assets/Clipboard.svg'
 import logo from './Assets/Logo.svg'
 import { Task } from './components/Task'
+import { TaskCompleted } from './components/TaskCompleted'
 import './Global.css'
-
-let hasContent = false
-let numberOfTasksCreated = 0
 
 export function App() {
   const [newTask, setNewTask] = useState('')
-  const [currentTasks, setCurrentTasks] = useState([""])
-
+  const [currentTasks, setCurrentTasks] = useState([''])
+  const [tasksCompleted, setTasksCompleted] = useState([''])
+  const [numberOfTasks, setNumberOfTasks] = useState(0)
+  
   function handleNewTask(event:FormEvent) {
     event.preventDefault()
     setCurrentTasks([...currentTasks, newTask])
-    numberOfTasksCreated++
+    setNumberOfTasks(numberOfTasks + 1)
     setNewTask('')
   }
 
@@ -24,13 +24,34 @@ export function App() {
     setNewTask(event.target.value)
   }
 
-  function deleteTask(content: string[]) {
-    numberOfTasksCreated--
-    setCurrentTasks(content)
+  function deleteTask(content: string) {
+    setNumberOfTasks(numberOfTasks - 1)
+    const tasksWithoutCompletedOne = currentTasks.filter(t => {
+      return t !== content  
+    })
+    setCurrentTasks(tasksWithoutCompletedOne)
+  }
+
+  function deleteFromTasksCompleted(content: string) {
+    setNumberOfTasks(numberOfTasks - 1)
+    const completedTasks = tasksCompleted.filter(t => {
+      return t !== content
+    })
+    setTasksCompleted(completedTasks)
+  }
+
+  function handleTaskCompleted(content: string) {
+    setTasksCompleted([...tasksCompleted, content])
+    
+    const tasksWithoutCompletedOne = currentTasks.filter(t => {
+      return t !== content  
+    })
+    setCurrentTasks(tasksWithoutCompletedOne)
   }
 
   const newTaskIsEmpty = newTask.length === 0
-  const tasksEmpty = currentTasks.length > 1
+  const tasksEmpty = numberOfTasks === 0
+  const amountCompleted = tasksCompleted.length - 1
 
   return (
     <div>
@@ -50,12 +71,12 @@ export function App() {
 
         <div className={styles.tasks}>
           <div className={styles.headerTasks}>
-            <div className={styles.counter}>Tarefas criadas<span>{numberOfTasksCreated}</span></div>
-            <div className={styles.counter}>Concluídas<span>{numberOfTasksCreated} de {}</span></div>
+            <div className={styles.counter}>Tarefas criadas<span>{numberOfTasks}</span></div>
+            <div className={styles.counter}>Concluídas<span>{amountCompleted} de {numberOfTasks}</span></div>
           </div>
           
           <div className={styles.tasksBox}>
-            <div className={tasksEmpty ? styles.tasksHasContent : styles.tasksEmpty}>
+            <div className={tasksEmpty ? styles.tasksEmpty : styles.tasksHasContent}>
               <img src={Clipboard} />
               <p>Você ainda não tem tarefas cadastradas</p>
               <p><span>Crie tarefas e organize seus itens a fazer</span></p>
@@ -63,20 +84,29 @@ export function App() {
           </div>
         </div>
         
-        
-        {currentTasks.map(task => {
+        {currentTasks.map((task, numberOfTasks) => {
             if(task == "") return
           return (
-            <Task 
-              key={`${numberOfTasksCreated}${task}`} 
-              test={`${numberOfTasksCreated}${task}`} 
-              content={task} 
-              currentTasks={currentTasks} 
-              deleteTask={deleteTask} 
+            <Task
+              key={`${numberOfTasks}${task}`}  
+              content={task}  
+              deleteTask={deleteTask}
+              handleTaskCompleted={handleTaskCompleted}
             />
           )
         })}
-        
+
+        {tasksCompleted.map(task => {
+            if(task == "") return
+          return (
+            <TaskCompleted 
+              key={`${numberOfTasks}${task}`}  
+              content={task}
+              deleteFromTasksCompleted={deleteFromTasksCompleted}
+            />
+          )
+        })} 
+
       </main>
     </div>
   )
