@@ -5,13 +5,15 @@ import styles from './TaskCompleted.module.css';
 interface TaskCompletedProps {
   content: string;
   deleteFromTasksCompleted: (content: string) => void;
+  handleTaskUncompleted: (content: string) => void;
 }
 
-export function TaskCompleted({ deleteFromTasksCompleted, content }:TaskCompletedProps) {
+export function TaskCompleted({ deleteFromTasksCompleted, content, handleTaskUncompleted }:TaskCompletedProps) {
   const [isChecked, setIsChecked] = useState(true)
 
-  function handle() {
+  function handleTaskNotComplete() {
     setIsChecked(!isChecked)
+    handleTaskUncompleted(content)
   }
 
   function handleRemoveTask() {
@@ -22,11 +24,11 @@ export function TaskCompleted({ deleteFromTasksCompleted, content }:TaskComplete
     <div className={styles.task}>
       <label>
         <div className={styles.checkButton}>
-          <Check className={isChecked == true ? styles.checked : styles.hidden}/>
+          <Check className={isChecked ? styles.checked : styles.hidden}/>
         </div>
-        <input type="checkbox" checked={isChecked} onChange={handle}/>
+        <input type="checkbox" checked={isChecked} onChange={handleTaskNotComplete}/>
       </label>
-      <p className={isChecked == true ? styles.textTask : styles.test}>{content}</p>
+      <p className={isChecked ? styles.textTask : styles.test}>{content}</p>
       <i className={styles.trash} onClick={handleRemoveTask}><Trash size={20} /></i>
     </div>
   )
