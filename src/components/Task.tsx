@@ -5,15 +5,15 @@ import styles from './Task.module.css';
 interface TaskProps {
   content: string;
   deleteTask: (content: string) => void;
-  handleTaskCompleted: (content: string) => void;
+  handleNewTaskCompleted: (content: string) => void;
 }
 
-export function Task({content, deleteTask, handleTaskCompleted}:TaskProps) {
+export function Task({content, deleteTask, handleNewTaskCompleted}:TaskProps) {
   const [isChecked, setIsChecked] = useState(false)
 
   function handleChecked() {
     setIsChecked(!isChecked)
-    handleTaskCompleted(content)
+    handleNewTaskCompleted(content)
   }
 
   function removeTask() {
