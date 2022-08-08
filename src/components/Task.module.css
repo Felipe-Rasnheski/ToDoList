@@ -15,7 +15,6 @@
   position: absolute;
   border-radius: 50%;
   text-align: center;
-  transition: none;
 }
 
 .checkButton:hover {
@@ -29,7 +28,6 @@
   background: var(--purple-500);
   border-radius: 50%;
   color: var(--gray-100);
-  transition: none;
   margin: -.2rem 0 0 -.2rem;
   border: 1px solid var(--purple-500);
 }
@@ -42,7 +40,6 @@
 .hidden {
   transform: scaleY(0);
   position: absolute;
-  transition: none;
 }
 
 .task p {
@@ -68,10 +65,8 @@
   height: 3rem;
   width: 3rem;
   color: var(--gray-300);
-  transition: linear;
   margin-top: -.5rem;
   border-radius: 4px;
-  transition: .1s linear;
 }
 
 .trash:hover {
