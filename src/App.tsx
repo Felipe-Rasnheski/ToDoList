@@ -12,16 +12,28 @@ export function App() {
   const [currentTasks, setCurrentTasks] = useState([''])
   const [tasksCompleted, setTasksCompleted] = useState([''])
   const [numberOfTasks, setNumberOfTasks] = useState(0)
+
+  function handleNewChange(event:ChangeEvent<HTMLInputElement>) {
+    setNewTask(event.target.value)
+  }
   
   function handleNewTask(event:FormEvent) {
     event.preventDefault()
     setCurrentTasks([...currentTasks, newTask])
     setNumberOfTasks(numberOfTasks + 1)
     setNewTask('')
+    setLocalStorageCurrentTasks([...currentTasks, newTask])
   }
 
-  function handleNewChange(event:ChangeEvent<HTMLInputElement>) {
-    setNewTask(event.target.value)
+  function handleNewTaskCompleted(content: string) {
+    setTasksCompleted([...tasksCompleted, content])
+    setLocalStorageCompletedTasks([...tasksCompleted, content])
+
+    const tasksWithoutCompletedOne = currentTasks.filter(t => {
+      return t !== content  
+    })
+    setCurrentTasks(tasksWithoutCompletedOne)
+    setLocalStorageCurrentTasks(tasksWithoutCompletedOne)
   }
 
   function deleteTask(content: string) {
@@ -30,6 +42,7 @@ export function App() {
       return t !== content  
     })
     setCurrentTasks(tasksWithoutCompletedOne)
+    setLocalStorageCurrentTasks(tasksWithoutCompletedOne)
   }
 
   function deleteFromTasksCompleted(content: string) {
@@ -38,32 +51,54 @@ export function App() {
       return t !== content
     })
     setTasksCompleted(completedTasks)
+    setLocalStorageCompletedTasks(completedTasks)
   }
 
-  function handleTaskCompleted(content: string) {
-    setTasksCompleted([...tasksCompleted, content])
-    
-    const tasksWithoutCompletedOne = currentTasks.filter(t => {
-      return t !== content  
-    })
-    setCurrentTasks(tasksWithoutCompletedOne)
-  }
-
-  function handleTaskUncompleted(content: string) {
+  function handleRemoveCompleted(content: string) {
     setCurrentTasks([...currentTasks, content])
-
+    setLocalStorageCurrentTasks([...currentTasks, content])
     const tasksWithoutUncompletedOne = tasksCompleted.filter(t => {
       return t !== content
     }) 
     setTasksCompleted(tasksWithoutUncompletedOne)
+    setLocalStorageCompletedTasks(tasksWithoutUncompletedOne)
+  }
+
+  function getLocalStorage() {
+    // @ts-ignore
+    const storageCurrentTasks = JSON.parse(localStorage.getItem('currentTasks'))
+    if( storageCurrentTasks == null) return
+    
+    setCurrentTasks(storageCurrentTasks)
+    // @ts-ignore
+    const storageCompletedTasks = JSON.parse(localStorage.getItem('tasksCompleted'))
+    setTasksCompleted(storageCompletedTasks)
+    setNumberOfTasks(storageCurrentTasks.length + storageCompletedTasks.length - 2)
+    // @ts-ignore
+    setReset(JSON.parse(localStorage.getItem('reset')))
+  }
+
+  function setLocalStorageCurrentTasks(newCurrentTasks: string[]) {
+    const current = JSON.stringify(newCurrentTasks)
+    localStorage.setItem('currentTasks', current)
+  }
+
+  function setLocalStorageCompletedTasks(newCompletedTasks: string[]) {
+    const completed = JSON.stringify(newCompletedTasks)
+    localStorage.setItem('tasksCompleted', completed)
+  }
+
+  function setIfReset(reset: boolean) {
+    localStorage.setItem('reset', JSON.stringify(reset))
   }
 
   const inputForNewTaskIsEmpty = newTask.length === 0
   const tasksEmpty = numberOfTasks === 0
   const amountCompleted = tasksCompleted.length - 1
+  const [reset, setReset] = useState(false)
 
   return (
-    <div>
+    <div onLoad={getLocalStorage}>
       <header className={styles.header}>
         <img src={logo} />
       </header>
@@ -100,23 +135,37 @@ export function App() {
               key={`${numberOfTasks}${task}`}  
               content={task}  
               deleteTask={deleteTask}
-              handleTaskCompleted={handleTaskCompleted}
+              handleNewTaskCompleted={handleNewTaskCompleted}
             />
           )
         })}
 
-        {tasksCompleted.map(task => {
+        {tasksCompleted.map((task, numberOfTasks) => {
             if(task == "") return
           return (
             <TaskCompleted 
               key={`${numberOfTasks}${task}`}  
               content={task}
               deleteFromTasksCompleted={deleteFromTasksCompleted}
-              handleTaskUncompleted={handleTaskUncompleted}
+              handleRemoveCompleted={handleRemoveCompleted}
             />
           )
         })} 
-
+        
+        <div className={`${tasksEmpty ? styles.hidden : styles.show} ${reset ? styles.colorWhite : styles.nothing}`}>
+          <label>
+            <span 
+              className={`${styles.resetDaily} ${reset ? styles.checked : styles.disabled}`}>
+            </span>
+            <input 
+              className={styles.hidden} 
+              type="checkbox" checked={reset} 
+              onChange={() => {setReset(!reset); 
+              setIfReset(!reset)}} 
+            />
+            Resetar as tarefas diariamente
+          </label>  
+        </div>
       </main>
     </div>
   )

@@ -10,6 +10,7 @@
   width: 73.6rem;
   margin: 0 auto;
   margin-top: -2.3rem;
+  margin-bottom: 6.4rem;
 }
 
 form {
@@ -55,32 +56,6 @@ button[type="submit"] span {
   line-height: 0;
 }
 
-.check {
-  transform: scaleY(0);
-  transition: none;
-}
-
-.resetDaily span.reset > .check {
-  position: absolute;
-  transform: scaleY(1);
-  color: var(--gray-100);
-  border: 1px solid var(--purple-500);
-  background: var(--purple-500);
-  border-radius: 50%;
-  display: block;
-  font-size: 1rem;
-  height: 1.6rem;
-  width: 1.6rem;
-}
-
-.resetDaily span.reset > .check:hover {
-  background: var(--purple-300);
-}
-
-.resetDaily .notReset:hover {
-  background: var(--gray-400)
-}
-
 .tasks {
   margin-top: 6.4rem;
   cursor: default;
@@ -118,7 +93,6 @@ button[type="submit"] span {
 .tasksHasContent {
   transform: scaleY(0);
   position: absolute;
-  transition: none;
 }
 
 .tasksEmpty {
@@ -135,4 +109,32 @@ button[type="submit"] span {
 
 .tasksEmpty span {
   font-weight: 400;
+}
+
+.hidden {
+  transform: scaleY(0);
+}
+
+.show {
+  transform: scaleY(1);
+  color: var(--gray-300);
+  position: absolute;
+  padding: 2.4rem 0 0 1.7rem
+}
+
+.resetDaily {
+  display: inline-block;
+  height: 1.6rem;
+  width: 1.6rem;
+  border: 2px solid var(--blue-500);
+  border-radius: 50%;
+}
+
+.resetDaily.checked {
+  background: var(--purple-500);
+  border: 5px solid var(--blue-300);
+}
+
+.colorWhite {
+  color: var(--gray-100);
 }
