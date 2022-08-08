@@ -5,15 +5,15 @@ import styles from './TaskCompleted.module.css';
 interface TaskCompletedProps {
   content: string;
   deleteFromTasksCompleted: (content: string) => void;
-  handleTaskUncompleted: (content: string) => void;
+  handleRemoveCompleted: (content: string) => void;
 }
 
-export function TaskCompleted({ deleteFromTasksCompleted, content, handleTaskUncompleted }:TaskCompletedProps) {
+export function TaskCompleted({ deleteFromTasksCompleted, content, handleRemoveCompleted }:TaskCompletedProps) {
   const [isChecked, setIsChecked] = useState(true)
 
   function handleTaskNotComplete() {
     setIsChecked(!isChecked)
-    handleTaskUncompleted(content)
+    handleRemoveCompleted(content)
   }
 
   function handleRemoveTask() {
