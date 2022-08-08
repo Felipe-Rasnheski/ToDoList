@@ -21,7 +21,7 @@
   box-sizing: border-box;
   padding: 0;margin: 0;border: 0;
   outline: none;border: none;
-  transition: .2s linear;
+  transition: 0s linear;
 }
 
 html {
