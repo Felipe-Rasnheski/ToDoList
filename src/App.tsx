@@ -96,6 +96,16 @@ export function App() {
   const tasksEmpty = numberOfTasks === 0
   const amountCompleted = tasksCompleted.length - 1
   const [reset, setReset] = useState(false)
+  const test = ['']
+
+  let date = new Date()
+  let hours = date.getHours()
+  let minutes = date.getMinutes()
+
+  if(hours == 1 && minutes == 0) {
+    setCurrentTasks([...currentTasks, ...tasksCompleted])
+    setTasksCompleted([''])
+  }
 
   return (
     <div onLoad={getLocalStorage}>
@@ -164,7 +174,8 @@ export function App() {
               setIfReset(!reset)}} 
             />
             Resetar as tarefas diariamente
-          </label>  
+          </label>
+          <div>Reseta em<strong>{hours}:{minutes}</strong></div>
         </div>
       </main>
     </div>
