@@ -145,7 +145,6 @@ button[type="submit"] span {
 
 .show > div > strong {
   text-align: center;
-  color: var(--gray-200);
   background: var(--gray-400);
   margin-left: .8rem;
   padding: .2rem .8rem;

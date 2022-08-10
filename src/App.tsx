@@ -65,22 +65,42 @@ export function App() {
   }
 
   function getLocalStorage() {
+     // @ts-ignore
+    const Day = JSON.parse(localStorage.getItem('day'))
+    if(Day == null) return
+    if(dayOfNow == 1) {
+      localStorage.setItem('day', JSON.stringify(0))
+    }
+    
+    if(Day != dayOfNow && reset) {
+      setCurrentTasks([...currentTasks, ...tasksCompleted])
+      setTasksCompleted([''])
+    }
+
     // @ts-ignore
     const storageCurrentTasks = JSON.parse(localStorage.getItem('currentTasks'))
-    if( storageCurrentTasks == null) return
-    
+    if(storageCurrentTasks == null) return
     setCurrentTasks(storageCurrentTasks)
+    setNumberOfTasks(storageCurrentTasks.length -1)
+
     // @ts-ignore
     const storageCompletedTasks = JSON.parse(localStorage.getItem('tasksCompleted'))
+    if(storageCompletedTasks == null) return
     setTasksCompleted(storageCompletedTasks)
     setNumberOfTasks(storageCurrentTasks.length + storageCompletedTasks.length - 2)
+
     // @ts-ignore
-    setReset(JSON.parse(localStorage.getItem('reset')))
+    const localStorageReset = JSON.parse(localStorage.getItem('reset'))
+    if(localStorageReset != null) {
+      setReset(localStorageReset)
+    }
   }
 
   function setLocalStorageCurrentTasks(newCurrentTasks: string[]) {
     const current = JSON.stringify(newCurrentTasks)
     localStorage.setItem('currentTasks', current)
+
+    localStorage.setItem('day', JSON.stringify(dayOfNow))
   }
 
   function setLocalStorageCompletedTasks(newCompletedTasks: string[]) {
@@ -96,16 +116,11 @@ export function App() {
   const tasksEmpty = numberOfTasks === 0
   const amountCompleted = tasksCompleted.length - 1
   const [reset, setReset] = useState(false)
-  const test = ['']
 
   let date = new Date()
-  let hours = date.getHours()
-  let minutes = date.getMinutes()
-
-  if(hours == 1 && minutes == 0) {
-    setCurrentTasks([...currentTasks, ...tasksCompleted])
-    setTasksCompleted([''])
-  }
+  let dayOfNow = date.getDate()
+  let hours = 23 - date.getHours()
+  let minutes = 59 - date.getMinutes()
 
   return (
     <div onLoad={getLocalStorage}>
