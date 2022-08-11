@@ -65,18 +65,6 @@ export function App() {
   }
 
   function getLocalStorage() {
-     // @ts-ignore
-    const Day = JSON.parse(localStorage.getItem('day'))
-    if(Day == null) return
-    if(dayOfNow == 1) {
-      localStorage.setItem('day', JSON.stringify(0))
-    }
-    
-    if(Day != dayOfNow && reset) {
-      setCurrentTasks([...currentTasks, ...tasksCompleted])
-      setTasksCompleted([''])
-    }
-
     // @ts-ignore
     const storageCurrentTasks = JSON.parse(localStorage.getItem('currentTasks'))
     if(storageCurrentTasks == null) return
@@ -94,6 +82,18 @@ export function App() {
     if(localStorageReset != null) {
       setReset(localStorageReset)
     }
+
+    // @ts-ignore
+    const Day = JSON.parse(localStorage.getItem('day'))
+    if(Day == null) return
+    if(dayOfNow == 1) {
+      localStorage.setItem('day', JSON.stringify(0))
+    }
+    
+    if(Day != dayOfNow && reset) {
+      setCurrentTasks([...currentTasks, ...tasksCompleted])
+      setTasksCompleted(['']) 
+    }
   }
 
   function setLocalStorageCurrentTasks(newCurrentTasks: string[]) {
@@ -101,6 +101,8 @@ export function App() {
     localStorage.setItem('currentTasks', current)
 
     localStorage.setItem('day', JSON.stringify(dayOfNow))
+    localStorage.setItem('day', JSON.stringify(12))
+    // fixed it tomorrow
   }
 
   function setLocalStorageCompletedTasks(newCompletedTasks: string[]) {
