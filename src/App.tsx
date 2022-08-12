@@ -114,6 +114,14 @@ export function App() {
     localStorage.setItem('reset', JSON.stringify(reset))
   }
 
+  function deleteTaskEmpty(content: string) {
+    const tasksWithoutEmpty = currentTasks.filter(task => {
+      return task !== content
+    })
+
+    setCurrentTasks(tasksWithoutEmpty) 
+  }
+
   const inputForNewTaskIsEmpty = newTask.length === 0
   const tasksEmpty = numberOfTasks === 0
   const amountCompleted = tasksCompleted.length - 1
@@ -156,7 +164,9 @@ export function App() {
         </div>
         
         {currentTasks.map((task, numberOfTasks) => {
-            if(task == "") return
+            if(task == "") {
+              deleteTaskEmpty(task)
+            }
           return (
             <Task
               key={`${numberOfTasks}${task}`}  
