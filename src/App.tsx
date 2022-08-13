@@ -75,7 +75,7 @@ export function App() {
     const storageCompletedTasks = JSON.parse(localStorage.getItem('tasksCompleted'))
     if(storageCompletedTasks == null) return
     setTasksCompleted(storageCompletedTasks)
-    setNumberOfTasks(storageCurrentTasks.length + storageCompletedTasks.length - 2)
+    setNumberOfTasks(storageCurrentTasks.length + storageCompletedTasks.length)
 
     // @ts-ignore
     const localStorageReset = JSON.parse(localStorage.getItem('reset'))
@@ -101,8 +101,6 @@ export function App() {
     localStorage.setItem('currentTasks', current)
 
     localStorage.setItem('day', JSON.stringify(dayOfNow))
-    localStorage.setItem('day', JSON.stringify(12))
-    // fixed it tomorrow
   }
 
   function setLocalStorageCompletedTasks(newCompletedTasks: string[]) {
@@ -114,17 +112,21 @@ export function App() {
     localStorage.setItem('reset', JSON.stringify(reset))
   }
 
-  function deleteTaskEmpty(content: string) {
-    const tasksWithoutEmpty = currentTasks.filter(task => {
+  function deleteTasksEmpty(content: string) {
+    const currentTasksWithoutEmpty = currentTasks.filter(task => {
       return task !== content
     })
+    setCurrentTasks(currentTasksWithoutEmpty)
 
-    setCurrentTasks(tasksWithoutEmpty) 
+    const completedTasksWithoutEmpty = tasksCompleted.filter(task => {
+      return task !== content
+    })
+    setTasksCompleted(completedTasksWithoutEmpty)
   }
 
   const inputForNewTaskIsEmpty = newTask.length === 0
   const tasksEmpty = numberOfTasks === 0
-  const amountCompleted = tasksCompleted.length - 1
+  const amountCompleted = tasksCompleted.length
   const [reset, setReset] = useState(false)
 
   let date = new Date()
@@ -165,7 +167,7 @@ export function App() {
         
         {currentTasks.map((task, numberOfTasks) => {
             if(task == "") {
-              deleteTaskEmpty(task)
+              deleteTasksEmpty(task)
             }
           return (
             <Task
@@ -178,7 +180,9 @@ export function App() {
         })}
 
         {tasksCompleted.map((task, numberOfTasks) => {
-            if(task == "") return
+            if(task == "") {
+              deleteTasksEmpty(task)
+            }
           return (
             <TaskCompleted 
               key={`${numberOfTasks}${task}`}  
