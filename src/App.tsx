@@ -69,7 +69,7 @@ export function App() {
     const storageCurrentTasks = JSON.parse(localStorage.getItem('currentTasks'))
     if(storageCurrentTasks == null) return
     setCurrentTasks(storageCurrentTasks)
-    setNumberOfTasks(storageCurrentTasks.length -1)
+    setNumberOfTasks(storageCurrentTasks.length)
 
     // @ts-ignore
     const storageCompletedTasks = JSON.parse(localStorage.getItem('tasksCompleted'))
@@ -206,7 +206,7 @@ export function App() {
             />
             Resetar as tarefas diariamente
           </label>
-          <div>Reseta em<strong>{hours}:{minutes}</strong></div>
+          <div>Reseta em<strong>{hours}h {minutes}m</strong></div>
         </div>
       </main>
     </div>

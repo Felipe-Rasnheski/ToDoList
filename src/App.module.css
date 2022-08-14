@@ -150,3 +150,34 @@ button[type="submit"] span {
   padding: .2rem .8rem;
   border-radius: 16px;
 }
+
+
+@media (min-width: 851px) {
+  html {
+    font-size: 62.5%;
+  }
+}
+
+@media (max-width: 850px) {
+  html {
+    font-size: 57%;
+  }
+}
+
+@media (max-width: 720px) {
+  .container {
+    padding: 0 1.5rem;
+    width: auto;
+    min-width: 300px;
+  }
+}
+
+@media (max-width: 420px) {
+  html {
+    font-size: 45%;
+  }
+
+  .header {
+    width: 100vw;
+  }
+}
