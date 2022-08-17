@@ -36,7 +36,7 @@ export function App() {
     setLocalStorageCurrentTasks(tasksWithoutCompletedOne)
   }
 
-  function deleteTask(content: string) {
+  function handleDeleteFromCurrentTasks(content: string) {
     setNumberOfTasks(numberOfTasks - 1)
     const tasksWithoutCompletedOne = currentTasks.filter(t => {
       return t !== content  
@@ -45,7 +45,7 @@ export function App() {
     setLocalStorageCurrentTasks(tasksWithoutCompletedOne)
   }
 
-  function deleteFromTasksCompleted(content: string) {
+  function handleDeleteFromTasksCompleted(content: string) {
     setNumberOfTasks(numberOfTasks - 1)
     const completedTasks = tasksCompleted.filter(t => {
       return t !== content
@@ -173,7 +173,7 @@ export function App() {
             <Task
               key={`${numberOfTasks}${task}`}  
               content={task}  
-              deleteTask={deleteTask}
+              handleDeleteFromCurrentTasks={handleDeleteFromCurrentTasks}
               handleNewTaskCompleted={handleNewTaskCompleted}
             />
           )
@@ -187,7 +187,7 @@ export function App() {
             <TaskCompleted 
               key={`${numberOfTasks}${task}`}  
               content={task}
-              deleteFromTasksCompleted={deleteFromTasksCompleted}
+              handleDeleteFromTasksCompleted={handleDeleteFromTasksCompleted}
               handleRemoveCompleted={handleRemoveCompleted}
             />
           )

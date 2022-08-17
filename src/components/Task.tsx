@@ -4,11 +4,11 @@ import styles from './Task.module.css';
 
 interface TaskProps {
   content: string;
-  deleteTask: (content: string) => void;
+  handleDeleteFromCurrentTasks: (content: string) => void;
   handleNewTaskCompleted: (content: string) => void;
 }
 
-export function Task({content, deleteTask, handleNewTaskCompleted}:TaskProps) {
+export function Task({content, handleDeleteFromCurrentTasks, handleNewTaskCompleted}:TaskProps) {
   const [isChecked, setIsChecked] = useState(false)
 
   function handleChecked() {
@@ -16,8 +16,8 @@ export function Task({content, deleteTask, handleNewTaskCompleted}:TaskProps) {
     handleNewTaskCompleted(content)
   }
 
-  function removeTask() {
-    deleteTask(content)
+  function handleDeleteTask() {
+    handleDeleteFromCurrentTasks(content)
   }
 
   return (
@@ -29,7 +29,7 @@ export function Task({content, deleteTask, handleNewTaskCompleted}:TaskProps) {
         <input type="checkbox" checked={isChecked} onChange={handleChecked}/>
       </label>
       <p className={isChecked ? styles.textTask : styles.test}>{content}</p>
-      <i className={styles.trash} onClick={removeTask}><Trash size={20} /></i>
+      <i className={styles.trash} onClick={handleDeleteTask}><Trash size={20} /></i>
     </div>
   )
 }
