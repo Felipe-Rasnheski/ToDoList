@@ -1,16 +1,13 @@
 {
   "name": "firstchallenge-to-do",
-  "homepage": "https://Felipe-Rasnheski.github.io/ToDoList",
+  "homepage": "https://Felipe-Rasnheski.github.io/ToDoList/",
   "private": true,
   "version": "0.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "preview": "vite preview",
-    "predeploy": "npm run build",
-    "deploy" : "gh-pages -d build"
-
+    "preview": "vite preview"
   },
   "dependencies": {
     "phosphor-react": "^1.4.1",
