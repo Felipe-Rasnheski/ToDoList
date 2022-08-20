@@ -125,14 +125,14 @@ export function App() {
   }
 
   const inputForNewTaskIsEmpty = newTask.length === 0
-  const tasksEmpty = numberOfTasks === 0
+  const taskContainerIsEmpty = numberOfTasks === 0
   const amountCompleted = tasksCompleted.length
   const [reset, setReset] = useState(false)
 
   let date = new Date()
   let dayOfNow = date.getDate()
-  let hours = 23 - date.getHours()
-  let minutes = 59 - date.getMinutes()
+  let hoursForReset = 23 - date.getHours()
+  let minutesForReset = 59 - date.getMinutes()
 
   return (
     <div onLoad={getLocalStorage}>
@@ -157,7 +157,7 @@ export function App() {
           </div>
           
           <div className={styles.tasksBox}>
-            <div className={tasksEmpty ? styles.tasksEmpty : styles.tasksHasContent}>
+            <div className={taskContainerIsEmpty ? styles.tasksEmpty : styles.tasksHasContent}>
               <img src={Clipboard} />
               <p>Você ainda não tem tarefas cadastradas</p>
               <p><span>Crie tarefas e organize seus itens a fazer</span></p>
@@ -193,7 +193,7 @@ export function App() {
           )
         })} 
         
-        <div className={`${tasksEmpty ? styles.hidden : styles.show} ${reset ? styles.colorWhite : styles.nothing}`}>
+        <div className={`${taskContainerIsEmpty ? styles.hidden : styles.show} ${reset ? styles.colorWhite : styles.nothing}`}>
           <label>
             <span 
               className={`${styles.resetDaily} ${reset ? styles.checked : styles.disabled}`}>
@@ -206,7 +206,7 @@ export function App() {
             />
             Resetar as tarefas diariamente
           </label>
-          <div>Reseta em<strong>{hours}h {minutes}m</strong></div>
+          <div>Reseta em<strong>{hoursForReset}h {minutesForReset}m</strong></div>
         </div>
       </main>
     </div>

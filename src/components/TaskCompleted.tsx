@@ -23,12 +23,10 @@ export function TaskCompleted({ handleDeleteFromTasksCompleted, content, handleR
   return (
     <div className={styles.task}>
       <label>
-        <div className={styles.checkButton}>
-          <Check className={isChecked ? styles.checked : styles.hidden}/>
-        </div>
+        <Check className={styles.checked}/>
         <input type="checkbox" checked={isChecked} onChange={handleTaskNotComplete}/>
       </label>
-      <p className={isChecked ? styles.textTask : styles.test}>{content}</p>
+      <p>{content}</p>
       <i className={styles.trash} onClick={handleDeleteTask}><Trash size={20} /></i>
     </div>
   )

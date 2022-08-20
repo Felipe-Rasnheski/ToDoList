@@ -1,20 +1,34 @@
 .task {
-  padding: 1.6rem;
+  padding: 1.6rem 1.4rem;
   border-radius: 8px;
   border: 1px solid var(--gray-400);
   background: var(--gray-500);
   color: var(--gray-100);
   display: flex;
+  align-items: flex-start;
   gap: 1.2rem;
+  margin-bottom: 1.2rem;
+}
+
+.task input[type="checkbox"] {
+  opacity: 0;
+  position: absolute;
+  top: 0;
+}
+
+.task > label {
+  height: 2.8rem;
+  width: 2.8rem;
+  padding: .4rem;
+  margin-top: -.4rem;
 }
 
 .checkButton {
+  display: inline-block;
   height: 2rem;
   width: 2rem;
   border:2px solid var(--blue-300);
-  position: absolute;
   border-radius: 50%;
-  text-align: center;
 }
 
 .checkButton:hover {
@@ -22,42 +36,12 @@
   background: var(--gray-400);
 }
 
-.checked {
-  height: 2rem;
-  width: 2rem;
-  background: var(--purple-500);
-  border-radius: 50%;
-  color: var(--gray-100);
-  margin: -.2rem 0 0 -.2rem;
-  border: 1px solid var(--purple-500);
-}
-
-.checked:hover {
-  background: var(--purple-300);
-  border: 1px solid var(--purple-300);
-}
-
-.hidden {
-  transform: scaleY(0);
-  position: absolute;
-}
-
 .task p {
-  width: 100%;
+  flex: 1;
   word-break: break-all;
   font-size: 1.4rem;
-  margin-left: 2.6rem;
   line-height: 1.4;
   cursor: default;
-}
-
-.textTask {
-  color: var(--gray-300);
-  text-decoration: line-through;
-}
-
-.task + .task {
-  margin-top: 1.2rem;
 }
 
 .trash {
@@ -73,10 +57,4 @@
   background: var(--gray-400);
   color: var(--red);
   cursor: pointer;
-}
-
-.task input[type="checkbox"] {
-  opacity: 0;
-  position: absolute;
-  top: 0;
 }
