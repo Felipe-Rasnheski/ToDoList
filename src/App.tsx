@@ -194,18 +194,20 @@ export function App() {
         })} 
         
         <div className={`${taskContainerIsEmpty ? styles.hidden : styles.show} ${reset ? styles.colorWhite : styles.nothing}`}>
-          <label>
-            <span 
+          <div>
+            <label>
+              <span 
               className={`${styles.resetDaily} ${reset ? styles.checked : styles.disabled}`}>
-            </span>
-            <input 
+              </span>
+              <input 
               className={styles.hidden} 
               type="checkbox" checked={reset} 
               onChange={() => {setReset(!reset); 
               setIfReset(!reset)}} 
             />
+            </label>  
             Resetar as tarefas diariamente
-          </label>
+          </div>
           <div>Reseta em<strong>{hoursForReset}h {minutesForReset}m</strong></div>
         </div>
       </main>

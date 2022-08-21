@@ -35,6 +35,7 @@
 .checked:hover {
   background: var(--purple-300);
   border: 2px solid var(--purple-300);
+  cursor: pointer;
 }
 
 .task p {

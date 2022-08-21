@@ -113,17 +113,35 @@ button[type="submit"] span {
 
 .hidden {
   transform: scaleY(0);
+  position: absolute;
+  top: 0;
 }
 
 .show {
   transform: scaleY(1);
   color: var(--gray-300);
   width: 100%;
-  padding-top: 2.4rem;
+  padding-top: 1.2rem;
   display: flex;
   justify-content: space-between;
   font-size: 1.4rem;
   font-weight: 700;
+}
+
+.show:hover {
+  cursor: default;
+}
+
+.show label {
+  display: inline-block;
+  width : 2.4rem;
+  height: 2.4rem;
+  padding: .6rem;
+  margin-right: 1rem; 
+}
+
+.show label:hover {
+  cursor: pointer;
 }
 
 .resetDaily {
@@ -132,6 +150,7 @@ button[type="submit"] span {
   width: 1.6rem;
   border: 2px solid var(--blue-500);
   border-radius: 50%;
+  margin-bottom: -.2rem; 
 }
 
 .resetDaily.checked {
