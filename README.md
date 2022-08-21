@@ -2,7 +2,7 @@
 ## Desafio 01 do Ignite 🚀💙
 
 <br />
-<img src="../public/Capa.png" />
+<img src="./public/Capa.png" />
 
 <br />
 
