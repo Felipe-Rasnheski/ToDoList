@@ -2,7 +2,7 @@
 ## Desafio 01 do Ignite 🚀💙
 
 <br />
-<img src="../public/Capa.png" />
+<img src="./public/Capa.png" />
 
 <br />
 
@@ -31,7 +31,7 @@ Funcionalidades extras que estou trabalhando para adicionar: 🔥 <br />
 - CSS <img src="https://cdn1.iconfinder.com/data/icons/logotypes/32/badge-css-3-256.png" width="15px" height="15px" />
 - Vite <img src="https://seeklogo.com/images/V/vite-logo-BFD4283991-seeklogo.com.png" width="15px" height="15px" />
 - ReactJS ⚛️
-- TypeScript  <img src="https://cdn.iconfinder.com/stored_data/558544/128/png?token=1661029658-3htDjPb2Hcxb%2BANpkUjIF8cmN7CepwwZUl3QNIBrvPk%3D" width="15px" height="15px" />
+- TypeScript  <img src="https://bognarjunior.files.wordpress.com/2018/09/typescript.png" width="15px" height="15px" />
 
 <br />
 
