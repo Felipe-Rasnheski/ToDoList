@@ -3,21 +3,24 @@ import { useState } from 'react';
 import styles from './TaskCompleted.module.css';
 
 interface TaskCompletedProps {
-  content: string;
-  handleDeleteFromTasksCompleted: (content: string) => void;
-  handleRemoveCompleted: (content: string) => void;
+  task: {
+    id: string,
+    content: string
+  };
+  handleRemoveCompleted: (task: {id: string, content: string}) => void;
+  handleDeleteFromTasksCompleted: (id: string) => void;
 }
 
-export function TaskCompleted({ handleDeleteFromTasksCompleted, content, handleRemoveCompleted }:TaskCompletedProps) {
+export function TaskCompleted({ task, handleRemoveCompleted, handleDeleteFromTasksCompleted }:TaskCompletedProps) {
   const [isChecked, setIsChecked] = useState(true)
 
   function handleTaskNotComplete() {
     setIsChecked(!isChecked)
-    handleRemoveCompleted(content)
+    handleRemoveCompleted(task)
   }
 
   function handleDeleteTask() {
-    handleDeleteFromTasksCompleted(content)
+    handleDeleteFromTasksCompleted(task.id)
   }
 
   return (
@@ -26,7 +29,7 @@ export function TaskCompleted({ handleDeleteFromTasksCompleted, content, handleR
         <Check className={styles.checked}/>
         <input type="checkbox" checked={isChecked} onChange={handleTaskNotComplete}/>
       </label>
-      <p>{content}</p>
+      <p>{task.content}</p>
       <i className={styles.trash} onClick={handleDeleteTask}><Trash size={20} /></i>
     </div>
   )
