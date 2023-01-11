@@ -21,7 +21,6 @@ Funcionalidades extras que estou trabalhando para adicionar: 🔥 <br />
 ✅ - Salvar tarefas em Local Storage <br />
 ✅ - Resetar diariamente as tarefas se o usuário desejar <br />
 ✅ - Tamanho responsivo <br />
-🟩 - Tema Dark e Light <br />
 
 <br />
 
